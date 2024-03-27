@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package order;
+option go_package="./order";
+
+service Order {
+  rpc CreateOrder(CreateOrderRequest) returns(CreateOrderResponse);
+  rpc CreateOrderGoods(CreateOrderGoodsRequest) returns(CreateOrderGoodsResponse);
+  rpc GetOrder(GetOrderRequest) returns(GetOrderResponse);
+  rpc GetOrderGoods(GetOrderGoodsRequest) returns(GetOrderGoodsResponse);
+  rpc UpdateOrderByOrderNO(UpdateOrderByOrderNORequest) returns(UpdateOrderByOrderNOResponse);
+}
+
+message OrderInfo {
+  int64  ID      = 10;
+  int64  UserID  = 20;
+  string OrderNO = 30;
+  string Amount  = 40;
+  int64  State   = 50;
+}
+
+message OrderGoodsInfo {
+  int64  ID        = 10;
+  int64  OrderID   = 20;
+  int64  GoodsID   = 30;
+  string UnitPrice = 40;
+  string GoodsName = 50;
+  int64  Num       = 60;
+}
+
+message CreateOrderRequest {
+  OrderInfo Info = 10;
+}
+
+message CreateOrderResponse {
+  OrderInfo Info = 10;
+}
+
+message CreateOrderGoodsRequest {
+ repeated OrderGoodsInfo Info = 10;
+}
+
+message CreateOrderGoodsResponse {
+  repeated OrderGoodsInfo Info = 10;
+}
+
+message GetOrderRequest {
+  int64 ID = 10;
+}
+
+message GetOrderResponse {
+  OrderInfo Info = 10;
+}
+
+message GetOrderGoodsRequest {
+  int64 OrderID = 10;
+}
+
+message GetOrderGoodsResponse {
+  repeated OrderGoodsInfo Infos = 10;
+}
+
+
+message UpdateOrderByOrderNORequest {
+  string OrderNo = 10;
+  int64  State   = 20;
+}
+
+message UpdateOrderByOrderNOResponse {
+
+}
+
+
